@@ -31,15 +31,27 @@
             text-align: center;
         }
         h1 {
-            font-size: 24px;
+            font-size: 22px;
             color: #1e293b;
             margin-bottom: 15px;
+        }
+        .page-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
         p {
             font-size: 16px;
             color: #64748b;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.5;
+        }
+        .timer-msg {
+            font-weight: bold;
+            color: #d97706;
+            margin-bottom: 15px;
+            font-size: 15px;
         }
         .btn {
             display: inline-block;
@@ -51,34 +63,57 @@
             font-weight: bold;
             text-decoration: none;
             border-radius: 8px;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-        .ad-container {
-            margin-top: 25px;
-            min-height: 50px;
-            width: 100%;
+        .btn.disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>مطلوبہ لنک حاصل کرنے کے لیے نیچے بٹن پر کلک کریں</h1>
-        <p>آپ کا مطلوبہ کنٹینٹ تیار ہے۔ نیچے دیے گئے بٹن کو دبا کر فوراً حاصل کریں۔</p>
+        <h1>مطلوبہ لنک حاصل کرنے کے لیے نیچے دیے گئے بٹن پر کلک کریں</h1>
+        
+        <!-- 📸 آپ کی اپلوڈ کردہ تصویر -->
+        <img src="img_770a0bce9046.jpg" alt="Landing Page Image" class="page-img">
 
-        <!-- Adsterra Direct Link -->
-        <a href="https://www.profitableratecpmnetwork.com/tjyevk9a?key=721176469edc0e6e6cfffcb52d76fbb1" class="btn" target="_blank" rel="noopener noreferrer">
+        <p>آپ کا کنٹینٹ تیار ہے۔ آپ کو خود بخود ری ڈائریکٹ کیا جا رہا ہے...</p>
+
+        <!-- ⏳ 2 سیکنڈ ٹائمر میسج -->
+        <div id="timer-text" class="timer-msg">براہِ کرم 2 سیکنڈ انتظار کریں...</div>
+
+        <!-- Adsterra Direct Link Button -->
+        <a id="download-btn" href="https://www.profitableratecpmnetwork.com/tjyevk9a?key=721176469edc0e6e6cfffcb52d76fbb1" class="btn disabled" target="_blank" rel="noopener noreferrer">
             یہاں کلک کریں (Click Here)
         </a>
-
-        <!-- Banner Ad Slot (اگر آپ کے پاس بینر کوڈ ہو تو یہاں لگائیں) -->
-        <div class="ad-container">
-        </div>
     </div>
+
+    <script>
+        const targetUrl = "https://www.profitableratecpmnetwork.com/tjyevk9a?key=721176469edc0e6e6cfffcb52d76fbb1";
+        let timeLeft = 2;
+        const timerText = document.getElementById('timer-text');
+        const btn = document.getElementById('download-btn');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerText.textContent = `براہِ کرم ${timeLeft} سیکنڈ انتظار کریں...`;
+            } else {
+                clearInterval(countdown);
+                timerText.textContent = "آپ کو ری ڈائریکٹ کیا جا رہا ہے...";
+                timerText.style.color = "#16a34a";
+                btn.classList.remove('disabled');
+                
+                // 🚀 ٹائمر ختم ہوتے ہی خود بخود سائیڈ (Adsterra Direct Link) پر بھیج دے گا
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+    </script>
 
 </body>
 </html>
